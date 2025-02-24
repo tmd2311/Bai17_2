@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     Button btChuyen;
-    EditText editTen, editNam;
+    EditText editTen, editNam, txtID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,17 +22,27 @@ public class MainActivity extends AppCompatActivity {
         btChuyen = findViewById(R.id.btChuyen);
         editTen= findViewById(R.id.editTen);
         editNam = findViewById(R.id.editNam);
+        txtID= findViewById(R.id.txtID);
 
 
         btChuyen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Man2.class);
-                String ht= editTen.getText().toString();
-                int nam= Integer.parseInt(editNam.getText().toString());
-                SinhVien sv = new SinhVien(ht, nam);
-                intent.putExtra("SinhVien", sv);
+                int id= Integer.parseInt(txtID.getText().toString());
+                intent.putExtra("id", id);
                 startActivity(intent);
+
+                SinhVien sv = getIntent().getParcelableExtra("sinhvien");
+
+                if (sv != null) {
+                    String hoTen = sv.getHoTen();
+                    int namSinh = sv.getNamSinh();
+                    // Xử lý dữ liệu...
+
+                    editTen.setText(hoTen);
+                    editNam.setText(namSinh);
+                }
             }
         });
 

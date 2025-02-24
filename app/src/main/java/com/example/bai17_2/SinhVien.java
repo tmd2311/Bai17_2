@@ -4,15 +4,20 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class SinhVien implements Parcelable {
+    private int id;
     private String hoten;
     private int namSinh;
 
-
-    public SinhVien(String hoten, int namSinh) {
+    // Constructor đầy đủ
+    public SinhVien(int id, String hoten, int namSinh) {
+        this.id = id;
         this.hoten = hoten;
         this.namSinh = namSinh;
     }
+
+    // Constructor cho Parcelable
     protected SinhVien(Parcel in) {
+        id = in.readInt(); // Đọc id
         hoten = in.readString();
         namSinh = in.readInt();
     }
@@ -31,6 +36,7 @@ public class SinhVien implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id); // Ghi id
         dest.writeString(hoten);
         dest.writeInt(namSinh);
     }
@@ -38,6 +44,11 @@ public class SinhVien implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    // Getter
+    public int getId() {
+        return id;
     }
 
     public String getHoTen() {
