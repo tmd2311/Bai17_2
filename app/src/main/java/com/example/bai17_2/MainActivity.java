@@ -2,6 +2,7 @@ package com.example.bai17_2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,14 +22,16 @@ public class MainActivity extends AppCompatActivity {
         btChuyen = findViewById(R.id.btChuyen);
         editTen= findViewById(R.id.editTen);
         editNam = findViewById(R.id.editNam);
+
+
         btChuyen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Man2.class);
                 String ht= editTen.getText().toString();
                 int nam= Integer.parseInt(editNam.getText().toString());
-                intent.putExtra("hoten", ht);
-                intent.putExtra("nam", nam);
+                SinhVien sv = new SinhVien(ht, nam);
+                intent.putExtra("SinhVien", sv);
                 startActivity(intent);
             }
         });

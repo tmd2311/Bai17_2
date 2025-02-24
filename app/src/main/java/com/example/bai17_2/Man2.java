@@ -20,11 +20,13 @@ public class Man2 extends AppCompatActivity {
         setContentView(R.layout.activity_man2);
         textTen= findViewById(R.id.textTen);
 
-        Intent intent1= getIntent();
-        String ht1= intent1.getStringExtra("hoten");
-        int nam = intent1.getIntExtra("nam",0);
+        SinhVien sv = getIntent().getParcelableExtra("SinhVien");
         btChuyenLai= findViewById(R.id.btChuyenlai);
-        textTen.setText("Chào: "+ht1+" Sinh năm: "+ String.valueOf(nam));
+        if (sv != null) {
+            String hoTen = sv.getHoTen();
+            int namSinh = sv.getNamSinh();
+            textTen.setText("Xin chao: "+ hoTen+" Sinh nam: "+ namSinh);
+        }
         btChuyenLai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

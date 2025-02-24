@@ -1,6 +1,9 @@
 package com.example.bai17_2;
 
-public class SinhVien {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class SinhVien implements Parcelable {
     private String hoten;
     private int namSinh;
 
@@ -9,16 +12,35 @@ public class SinhVien {
         this.hoten = hoten;
         this.namSinh = namSinh;
     }
-
-    public void setHoten(String hoten) {
-        this.hoten = hoten;
+    protected SinhVien(Parcel in) {
+        hoten = in.readString();
+        namSinh = in.readInt();
     }
 
-    public void setNamSinh(int namSinh) {
-        this.namSinh = namSinh;
+    public static final Creator<SinhVien> CREATOR = new Creator<SinhVien>() {
+        @Override
+        public SinhVien createFromParcel(Parcel in) {
+            return new SinhVien(in);
+        }
+
+        @Override
+        public SinhVien[] newArray(int size) {
+            return new SinhVien[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(hoten);
+        dest.writeInt(namSinh);
     }
 
-    public String getHoten() {
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public String getHoTen() {
         return hoten;
     }
 
